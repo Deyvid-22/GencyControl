@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Custumer {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  phone  String
+  email  String
+  adress String?
+
+  create_at  DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  userId String? @db.ObjectId
+  User   User?   @relation(fields: [userId], references: [id])
+
+  tickets Ticket[]
+}
+
+model Ticket {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+
+  create_at  DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  custumerId String?   @db.ObjectId
+  custumer   Custumer? @relation(fields: [custumerId], references: [id])
+
+  userId String @db.ObjectId
+  User   User?  @relation(fields: [userId], references: [id])
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  tickets   Ticket[]
+  custumers Custumer[]
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String   @id @default(auto()) @map("_id") @db.ObjectId
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

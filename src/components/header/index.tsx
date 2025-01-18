@@ -9,11 +9,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { LogOut } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="w-full flex justify-center items-center px-2 py-6 shadow-md">
+    <header className="w-full flex justify-center items-center px-2  shadow-md h-20 overflow-hidden">
       <div className="w-full  flex items-center justify-between max-w-7xl">
         <Link href="/dashboard">
           <h1 className=" text-2xl pl-1 font-bold">
