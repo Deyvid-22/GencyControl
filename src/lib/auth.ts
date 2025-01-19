@@ -2,7 +2,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prismaClient } from "./prisma";
-import { Session, User } from "next-auth"; // Importando os tipos necessários
+import { User } from "next-auth";
 
 export const authOptions = {
   adapter: PrismaAdapter(prismaClient),
@@ -19,7 +19,7 @@ export const authOptions = {
       token,
       user,
     }: {
-      session: Session;
+      session: any;
       token: any;
       user: User;
     }) {

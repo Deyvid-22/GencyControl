@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Custumer {
+model Customer {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   phone  String
@@ -31,8 +31,8 @@ model Ticket {
   create_at  DateTime? @default(now())
   updated_at DateTime? @default(now())
 
-  custumerId String?   @db.ObjectId
-  custumer   Custumer? @relation(fields: [custumerId], references: [id])
+  customerId String?   @db.ObjectId
+  customer   Customer? @relation(fields: [customerId], references: [id])
 
   userId String @db.ObjectId
   User   User?  @relation(fields: [userId], references: [id])
@@ -66,8 +66,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  tickets   Ticket[]
-  custumers Custumer[]
+  tickets  Ticket[]
+  customer Customer[]
 }
 
 model Session {

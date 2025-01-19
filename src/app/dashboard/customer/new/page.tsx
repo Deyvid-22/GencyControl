@@ -12,6 +12,8 @@ export default async function New() {
     redirect("/");
   }
 
+  console.log(session.user.id);
+
   return (
     <div>
       <Container>
@@ -25,7 +27,7 @@ export default async function New() {
             </Link>
             <h1 className="text-3xl font-bold">Novo cliente</h1>
           </div>
-          <NewCustomerForm />
+          <NewCustomerForm userId={session.user.id} />
         </main>
       </Container>
     </div>

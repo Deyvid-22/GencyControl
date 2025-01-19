@@ -18,10 +18,10 @@ export function DashboardHeader() {
           chamados
         </Link>
         <Link
-          href="/dashboard/custumer"
+          href="/dashboard/customer"
           className={`${
-            pathname === "/dashboard/custumer" ||
-            pathname === "/dashboard/custumer/new"
+            pathname === "/dashboard/customer" ||
+            pathname === "/dashboard/customer/new"
               ? "text-green-300"
               : ""
           } hover:opacity-80 duration-200 `}
