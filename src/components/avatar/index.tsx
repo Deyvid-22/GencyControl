@@ -1,11 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-export function AvatarUser() {
+import { User } from "lucide-react";
+export function AvatarUser({ img }: { img: string }) {
   return (
     <div>
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage src={img} />
+        <AvatarFallback>
+          <User />
+        </AvatarFallback>
       </Avatar>
     </div>
   );
