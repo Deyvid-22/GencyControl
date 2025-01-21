@@ -28,7 +28,7 @@ export function FormTicket({ customer }: CustomerProps) {
   });
 
   async function handleRegister(data: FormData) {
-    const response = await api.post("/api/ticket", {
+    await api.post("/api/ticket", {
       name: data.name,
       description: data.description,
       customerId: customer.id,
