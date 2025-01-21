@@ -20,7 +20,7 @@ export default async function New() {
         <main className="flex flex-col mt-9 mb-2">
           <div className="flex items-center gap-3">
             <Link
-              href="/dashboard/custumer"
+              href="/dashboard/customer"
               className="bg-blue-500 hover:bg-blue-700 font-bold px-1 rounded"
             >
               Voltar
