@@ -5,6 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { TicketsItem } from "./components/ticket";
 import { prismaClient } from "@/lib/prisma";
+import { ButtonRefresh } from "./components/button-refresh";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
@@ -15,11 +16,16 @@ export default async function Dashboard() {
 
   const tikets = await prismaClient.ticket.findMany({
     where: {
-      userId: session?.user.id,
       status: "ABERTO",
+      customer: {
+        userId: session?.user.id,
+      },
     },
     include: {
       customer: true,
+    },
+    orderBy: {
+      create_at: "desc",
     },
   });
 
@@ -28,12 +34,15 @@ export default async function Dashboard() {
       <main className="mt-9 mb-2">
         <div className="flex items-center justify-between">
           <h1 className="font-bold text-3xl">Chamados</h1>
-          <Link
-            href="/dashboard/new"
-            className="bg-blue-500 hover:bg-blue-700 font-bold  px-1 rounded"
-          >
-            Abrir chamados
-          </Link>
+          <div className="flex justify-center items-center gap-3">
+            <ButtonRefresh />
+            <Link
+              href="/dashboard/new"
+              className="bg-blue-500 hover:bg-blue-700 font-bold  px-1 rounded"
+            >
+              Abrir chamados
+            </Link>
+          </div>
         </div>
 
         <table className="min-w-full my-2">

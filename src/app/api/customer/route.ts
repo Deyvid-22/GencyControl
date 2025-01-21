@@ -78,3 +78,28 @@ export async function DELETE(req: Request) {
     );
   }
 }
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+
+  const cutumerEmail = searchParams.get("email");
+
+  if (!cutumerEmail || cutumerEmail === "") {
+    return NextResponse.json({ error: "Custumer not found" }, { status: 400 });
+  }
+
+  try {
+    const customer = await prismaClient.customer.findFirst({
+      where: {
+        email: cutumerEmail,
+      },
+    });
+    return NextResponse.json(customer);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "Failed to get client" },
+      { status: 400 }
+    );
+  }
+}

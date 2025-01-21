@@ -1,6 +1,6 @@
 "use client";
 
-import { FileCheckIcon, File } from "lucide-react";
+import { File, CheckSquare } from "lucide-react";
 import { TicketProps } from "@/utils/tickets-type";
 import { CustomerProps } from "@/utils/customer-utils-type";
 import { api } from "@/lib/api";
@@ -51,7 +51,7 @@ export function TicketsItem({ customer, ticket }: TicketItemProps) {
 
       <td className="text-left">
         <button aria-label="Excluir ticket" onClick={handleChangeStatus}>
-          <FileCheckIcon size={20} color="gray" />
+          <CheckSquare size={20} color="gray" />
         </button>
         <button
           aria-label="Ver detalhes do ticket"

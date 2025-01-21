@@ -1,6 +1,6 @@
 export interface TicketProps {
   id: string;
-  userId: string;
+  userId: string | null;
   name: string;
   description: string;
   status: string;
